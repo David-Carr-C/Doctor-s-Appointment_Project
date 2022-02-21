@@ -1,10 +1,17 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Patient extends User {
     private String birthday;
     private double weight;
     private double height;
     private String blood;
+
+    //New Feature, los pacientes pueden ver y administrar sus appointments
+    private ArrayList<AppointmentDoctor> patientToDoctorAppointments = new ArrayList<>();
+    private ArrayList<AppointmentNurse> patientToNurseAppointments = new ArrayList<>();
 
     Patient(String name, String email) {
         super(name,email);
@@ -57,13 +64,23 @@ public class Patient extends User {
                 "Historial Clinico\n" +
                 "Padecimientos";
     }
-    /*
-    public int getId() {
-        return id;
+
+    //New feature
+    public void addPatientToNurseAppointments(Nurse nurse/*, Patient patient*/, Date date, String time) {
+        AppointmentNurse appointmentNurse = new AppointmentNurse(this,nurse); //Se crea una cita de Nurse, el constructor necesita un paciente y una nurse
+        appointmentNurse.schedulable(date,time); //Se hace un schedule de esta cita, gracias al date y time
+        patientToNurseAppointments.add(appointmentNurse); //Se agrega a la array de Patient
+    }
+    public ArrayList<AppointmentNurse> getPatientToNurseAppointments() {
+        return patientToNurseAppointments;
+    }
+    public void addPatientToDoctorAppointments(Doctor doctor/*, Patient patient <- es this*/, Date date, String time) {
+        AppointmentDoctor appointmentDoctor = new AppointmentDoctor(this,doctor);
+        appointmentDoctor.schedulable(date,time);
+        patientToDoctorAppointments.add(appointmentDoctor);//Se agrega a la array de Patient
+    }
+    public ArrayList<AppointmentDoctor> getPatientToDoctorAppointments() {
+        return patientToDoctorAppointments;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    */
 }

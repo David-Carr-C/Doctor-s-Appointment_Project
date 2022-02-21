@@ -6,6 +6,7 @@ public class Palindromo {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String palabra = scanner.nextLine();
+        System.out.println(isItPalindrome(scanner.nextLine()));
         palabra = palabra.toLowerCase();
         palabra = palabra.replace(" ", "");
         palabra = palabra.replace("á", "a");
@@ -25,5 +26,30 @@ public class Palindromo {
             a--;
         }
         System.out.println("Result: "+isItPalindromo);
+    }
+
+    /**
+     * Va a verificar si la string es palindromo o no
+     *
+     * @param string Sera la palabra a verificar
+     * @return {@code true} si la palabra es palindromo, si no entonces {@code false}
+     * */
+    public static boolean isItPalindrome(String string) {
+        string = string.toLowerCase();
+        string = string.replace("á","a");
+        string = string.replace("é", "e");
+        string = string.replace("í", "i");
+        string = string.replace("ó", "o");
+        string = string.replace("ú", "u");
+        int j = string.length();
+        for (int i = 0; i<string.length(); i++){
+            j--;
+            if (string.charAt(i)==string.charAt(j)){
+                //System.out.println("Igualdad entre "+string.charAt(i)+" y "+string.charAt(j));
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }

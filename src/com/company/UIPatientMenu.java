@@ -23,6 +23,7 @@ public class UIPatientMenu {
                     showBookAppointmentMenu();
                     break;
                 case 2:
+                    showMyAppointmentsMenu();
                     break;
                 case 0:
                     break;
@@ -72,6 +73,9 @@ public class UIPatientMenu {
 
                 if (responseDateSel==1) {
                     response = 0;
+                    patientLogged.addPatientToDoctorAppointments(doctorAvailableSelectedObject,
+                            doctorAvailableSelectedObject.getAvailableAppointments().get(indexDate).getDate(),
+                            doctorAvailableSelectedObject.getAvailableAppointments().get(indexDate).getTime());
                 } else if (responseDateSel ==2 ) {
                     response = 2; //Al ser diferente de 0, se volvera a displayear el menu
                 } else {
@@ -80,5 +84,27 @@ public class UIPatientMenu {
             }
             
         }while (response!=0);
+    }
+
+    private static void showMyAppointmentsMenu() {
+        int response = 0;
+        do {
+            System.out.println("::MyAppointments");
+            if (patientLogged.getPatientToDoctorAppointments().size()==0) {
+                System.out.println("Don't have appointments");
+                break;
+            }
+            for (int i = 0; i <patientLogged.getPatientToDoctorAppointments().size() ; i++) {
+                int j = i+1;
+                System.out.println(j+". "+"Date: "+patientLogged.getPatientToDoctorAppointments().get(i).getDate()+
+                        "Time: "+patientLogged.getPatientToDoctorAppointments().get(i).getTime()+
+                        "\nDoctor: "+patientLogged.getPatientToDoctorAppointments().get(i).getDoctor().getName());
+            }
+            System.out.println("Press enter to exit.");
+            String something = scanner.nextLine();
+            if (something!=null) {
+                response=1;
+            }
+        } while (response!=0);
     }
 }
